@@ -1,10 +1,15 @@
 export type Project = {
   name: string;
+  category: string;
   description: string;
   technologies: string[];
   highlights: string[];
   highlightLabel: string;
   contribution?: string;
+  featured?: boolean;
+  personal?: boolean;
+  mockup: "dashboard" | "salon" | "infra" | "fitness" | "restaurant";
+  image?: string;
   liveUrl?: string | null;
   githubUrl?: string | null;
 };
@@ -12,53 +17,58 @@ export type Project = {
 export const featuredProjects: Project[] = [
   {
     name: "StoreOS",
+    category: "Professional Project",
     description:
       "Business management platform designed to support day-to-day business operations.",
     technologies: ["Next.js", "TypeScript", "Node.js", "REST APIs"],
     highlightLabel: "Modules",
     highlights: [
-      "Customers",
-      "Bookings / Orders",
+      "CUSTOMERS",
+      "BOOKINGS",
       "POS",
-      "Staff",
-      "Inventory",
-      "Procurement",
-      "Marketing",
-      "Finance",
+      "STAFF",
+      "INVENTORY",
+      "PROCUREMENT",
+      "MARKETING",
+      "FINANCE",
     ],
     contribution:
-      "Worked on frontend development, API integration, data workflows, UI improvements, debugging and testing.",
+      "Worked on frontend development, API integration, data workflows, UI improvements, debugging and testing across real-world business workflows.",
+    featured: true,
+    mockup: "dashboard",
+    image: "/projects/storeos.png",
     liveUrl: null,
     githubUrl: null,
   },
   {
     name: "SalonOS",
+    category: "Professional Project",
     description:
-      "Comprehensive salon management platform for managing business operations.",
+      "Comprehensive salon management platform covering business onboarding and operational workflows.",
     technologies: ["Next.js", "TypeScript", "Node.js", "MongoDB"],
     highlightLabel: "Modules",
     highlights: [
-      "Onboarding",
-      "Dashboard",
-      "Bookings",
-      "Services",
-      "Staff Management",
-      "Customers",
-      "Product & Inventory",
-      "Asset Management",
-      "Marketing",
-      "Finance",
-      "Settings",
+      "ONBOARDING",
+      "BOOKINGS",
+      "SERVICES",
+      "STAFF",
+      "CUSTOMERS",
+      "INVENTORY",
+      "MARKETING",
+      "FINANCE",
     ],
     contribution:
-      "Worked across multiple modules, implemented and tested workflows, identified bugs, fixed UI and functional issues, and performed regression validation.",
+      "Worked across multiple modules, implemented and tested workflows, identified and resolved UI and functional issues, and performed regression validation.",
+    mockup: "salon",
+    image: "/projects/salonos.png",
     liveUrl: null,
     githubUrl: null,
   },
   {
     name: "Qualinix",
+    category: "Professional Project",
     description:
-      "Backend-oriented application infrastructure involving containerized services.",
+      "Backend-oriented application involving containerized services and development infrastructure.",
     technologies: [
       "Node.js",
       "PostgreSQL",
@@ -66,16 +76,11 @@ export const featuredProjects: Project[] = [
       "Docker Compose",
       "RabbitMQ",
     ],
-    highlightLabel: "Focus Areas",
-    highlights: [
-      "Backend services",
-      "PostgreSQL",
-      "RabbitMQ",
-      "Docker",
-      "Service configuration",
-    ],
+    highlightLabel: "Infrastructure",
+    highlights: ["Node.js API", "RabbitMQ", "PostgreSQL", "Docker"],
     contribution:
-      "Worked with backend services, PostgreSQL connectivity, Docker environments, RabbitMQ infrastructure and service troubleshooting.",
+      "Worked with backend services, PostgreSQL connectivity, Docker environments, RabbitMQ infrastructure, service configuration and troubleshooting.",
+    mockup: "infra",
     liveUrl: null,
     githubUrl: null,
   },
@@ -84,24 +89,28 @@ export const featuredProjects: Project[] = [
 export const personalProjects: Project[] = [
   {
     name: "KN Raju Fitness",
-    description: "Gym management platform.",
+    category: "Personal Project",
+    description:
+      "Gym management platform concept covering memberships, payments, member management and supplement inventory.",
     technologies: ["Next.js", "TypeScript", "Node.js", "MongoDB"],
     highlightLabel: "Features",
     highlights: [
       "Member Management",
       "Membership Plans",
-      "Membership Renewal",
-      "Payment Management",
+      "Payments",
       "Supplement Store",
-      "Inventory Management",
       "Admin Dashboard",
     ],
+    personal: true,
+    mockup: "fitness",
     liveUrl: null,
     githubUrl: null,
   },
   {
     name: "Gana-Mama",
-    description: "Restaurant website and management concept.",
+    category: "Personal Project",
+    description:
+      "Restaurant website and admin platform concept for menu and order management.",
     technologies: ["Next.js", "Node.js", "Express.js", "MongoDB"],
     highlightLabel: "Features",
     highlights: [
@@ -109,8 +118,9 @@ export const personalProjects: Project[] = [
       "Menu",
       "Order Management",
       "Admin Portal",
-      "Menu Management",
     ],
+    personal: true,
+    mockup: "restaurant",
     liveUrl: null,
     githubUrl: null,
   },

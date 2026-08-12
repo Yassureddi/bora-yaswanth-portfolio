@@ -1,52 +1,37 @@
-import { MapPin, Building2, Clock } from "lucide-react";
 import { experience } from "@/data/experience";
-import SectionHeading from "@/components/SectionHeading/SectionHeading";
+import Reveal from "@/components/Reveal/Reveal";
 import styles from "./Experience.module.css";
 
 export default function Experience() {
   return (
-    <section id="experience" className={`section ${styles.experience}`}>
+    <section id="experience" className={`section ${styles.section}`}>
       <div className="container">
-        <SectionHeading
-          eyebrow="Career"
-          title="Professional Experience"
-        />
-
-        <div className={styles.timeline}>
-          <div className={styles.line} aria-hidden="true" />
-
+        <Reveal>
+          <p className="eyebrow">Career</p>
+          <h2 className={styles.title}>Professional Experience</h2>
+        </Reveal>
+        <Reveal>
           <article className={styles.card}>
-            <div className={styles.marker} aria-hidden="true" />
-
-            <div className={styles.cardInner}>
-              <div className={styles.header}>
-                <div>
-                  <h3 className={styles.position}>{experience.position}</h3>
-                  <p className={styles.company}>
-                    <Building2 size={16} aria-hidden />
-                    {experience.company}
-                  </p>
-                </div>
-                <div className={styles.meta}>
-                  <p>
-                    <Clock size={15} aria-hidden />
-                    <span>{experience.duration}</span>
-                  </p>
-                  <p>
-                    <MapPin size={15} aria-hidden />
-                    <span>{experience.location}</span>
-                  </p>
-                </div>
+            <div className={styles.head}>
+              <div>
+                <h3>{experience.position}</h3>
+                <p className={styles.company}>{experience.company}</p>
               </div>
-
-              <ul className={styles.list}>
-                {experience.responsibilities.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
+              <p className={styles.duration}>{experience.duration}</p>
+            </div>
+            <p className={styles.summary}>{experience.summary}</p>
+            <ul>
+              {experience.responsibilities.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+            <div className={styles.tags}>
+              {experience.technologies.map((t) => (
+                <span key={t}>{t}</span>
+              ))}
             </div>
           </article>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

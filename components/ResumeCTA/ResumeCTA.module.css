@@ -1,101 +1,77 @@
 .cta {
-  padding-block: clamp(3rem, 6vw, 4.5rem);
+  background: #ffffff;
 }
 
-.inner {
-  display: grid;
-  gap: 1.75rem;
-  padding: 2rem 1.5rem;
-  border: 1px solid var(--gold-border);
-  border-radius: var(--radius-lg);
-  background: linear-gradient(
-    135deg,
-    rgba(201, 162, 39, 0.1) 0%,
-    rgba(22, 22, 26, 0.85) 45%,
-    rgba(14, 14, 16, 0.95) 100%
-  );
-  box-shadow: var(--shadow-card);
+.box {
+  padding: 2rem 1.4rem;
+  border-radius: 16px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  box-shadow: var(--shadow);
   text-align: center;
 }
 
-.copy {
-  max-width: 36rem;
-  margin-inline: auto;
-}
-
-.title {
-  font-size: clamp(1.5rem, 3vw, 2rem);
-  margin-bottom: 0.65rem;
-  color: var(--text-primary);
+.box h2 {
+  margin-top: 0.65rem;
+  font-size: clamp(1.9rem, 4vw, 2.8rem);
+  color: #111827;
 }
 
 .text {
-  color: var(--text-secondary);
-  font-size: 1.02rem;
+  margin: 0.85rem auto 0;
+  max-width: 36rem;
+  color: #64748b;
 }
 
 .actions {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 0.85rem;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
 }
 
-.primaryBtn,
-.secondaryBtn {
+.secondary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.45rem;
   min-height: 48px;
-  padding: 0.75rem 1.35rem;
-  border-radius: var(--radius-sm);
-  font-weight: 600;
-  font-size: 0.95rem;
-  transition:
-    transform var(--transition),
-    background var(--transition),
-    border-color var(--transition),
-    box-shadow var(--transition);
+  padding: 0.75rem 1.25rem;
+  border-radius: 999px;
+  border: 1.5px solid #2563eb;
+  background: #ffffff;
+  font-weight: 700;
+  color: #2563eb;
+  transition: background var(--ease);
 }
 
-.primaryBtn {
-  background: var(--gold);
-  color: #0a0a0b;
-  border: 1px solid var(--gold);
+.secondary:hover {
+  background: #eff6ff;
 }
 
-.primaryBtn:hover {
-  background: var(--gold-light);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(201, 162, 39, 0.25);
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.85rem 1.25rem;
+  margin-top: 1.35rem;
 }
 
-.secondaryBtn {
-  background: transparent;
-  color: var(--text-primary);
-  border: 1px solid var(--gold-border);
+.meta a,
+.meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: #64748b;
+  font-size: 0.9rem;
 }
 
-.secondaryBtn:hover {
-  border-color: var(--gold);
-  background: var(--gold-muted);
-  transform: translateY(-2px);
+.meta a:hover {
+  color: #2563eb;
 }
 
 @media (min-width: 800px) {
-  .inner {
-    grid-template-columns: 1.4fr auto;
-    align-items: center;
-    text-align: left;
-    padding: 2.25rem 2rem;
-  }
-
-  .copy {
-    margin-inline: 0;
-  }
-
-  .actions {
-    justify-content: flex-end;
+  .box {
+    padding: 2.5rem 2rem;
   }
 }

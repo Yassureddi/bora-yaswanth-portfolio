@@ -1,6 +1,6 @@
 .heading {
-  margin-bottom: 2.75rem;
-  max-width: 40rem;
+  margin-bottom: 2.35rem;
+  max-width: 42rem;
 }
 
 .center {
@@ -9,21 +9,35 @@
 }
 
 .eyebrow {
-  margin-bottom: 0.65rem;
-  font-size: 0.8rem;
-  font-weight: 500;
-  letter-spacing: 0.14em;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.7rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--gold);
+  color: #2563eb;
+}
+
+.eyebrow::before {
+  content: "";
+  width: 1.25rem;
+  height: 1px;
+  background: #2563eb;
+}
+
+.center .eyebrow {
+  justify-content: center;
 }
 
 .title {
-  font-size: clamp(1.85rem, 3.5vw, 2.5rem);
-  color: var(--text-primary);
+  font-size: clamp(1.85rem, 3.4vw, 2.55rem);
+  color: #111827;
 }
 
 .description {
-  margin-top: 0.85rem;
-  color: var(--text-secondary);
+  margin-top: 0.8rem;
+  color: #475569;
   font-size: 1.05rem;
 }

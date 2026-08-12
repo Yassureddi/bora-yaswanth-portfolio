@@ -1,37 +1,45 @@
-import { Mail, MapPin } from "lucide-react";
+import fs from "node:fs";
+import path from "node:path";
+import Image from "next/image";
+import { Mail } from "lucide-react";
 import { LinkedInIcon, GitHubIcon } from "@/components/icons/SocialIcons";
 import { personal } from "@/data/personal";
-import ResumeDownloadButton from "@/components/ResumeDownloadButton/ResumeDownloadButton";
 import styles from "./Hero.module.css";
 
+function hasProfileImage() {
+  return fs.existsSync(
+    path.join(process.cwd(), "public", "profile", "profile-hero.png")
+  );
+}
+
 export default function Hero() {
+  const showPhoto = hasProfileImage();
+
   return (
-    <section id="home" className={styles.hero} aria-labelledby="hero-name">
+    <section id="home" className={styles.hero}>
+      <div className={styles.dots} aria-hidden="true" />
       <div className={`container ${styles.grid}`}>
-        <div className={styles.content}>
-          <h1 id="hero-name" className={styles.name}>
-            {personal.displayName}
+        <div className={styles.copy}>
+          <p className={styles.hi}>{personal.heroGreeting}</p>
+          <h1 className={styles.title}>
+            {personal.heroLead}{" "}
+            <span className={styles.accent}>{personal.displayName}</span>
           </h1>
           <p className={styles.role}>{personal.role.toUpperCase()}</p>
-
-          <p className={styles.availability}>
-            <span className={styles.availabilityDot} aria-hidden="true" />
-            {personal.availability}
-          </p>
-
-          <p className={styles.headline}>{personal.headline}</p>
           <p className={styles.summary}>{personal.summary}</p>
-
-          <p className={styles.location}>
-            <MapPin size={15} aria-hidden />
-            <span>{personal.location}</span>
-          </p>
+          <p className={styles.support}>{personal.supporting}</p>
 
           <div className={styles.actions}>
-            <a href="#projects" className={styles.primaryBtn}>
+            <a
+              href={personal.resumePath}
+              download={personal.resumeFilename}
+              className={styles.primary}
+            >
+              Download My Resume
+            </a>
+            <a href="#projects" className={styles.secondary}>
               View My Work
             </a>
-            <ResumeDownloadButton variant="secondary" />
           </div>
 
           <div className={styles.socials} aria-label="Social links">
@@ -39,103 +47,43 @@ export default function Hero() {
               href={personal.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className={styles.socialLink}
-              aria-label="LinkedIn profile"
+              aria-label="LinkedIn"
             >
-              <LinkedInIcon size={18} aria-hidden />
-              <span>LinkedIn</span>
+              <LinkedInIcon size={18} />
+            </a>
+            <a href={`mailto:${personal.email}`} aria-label="Email">
+              <Mail size={18} />
             </a>
             {personal.github ? (
               <a
                 href={personal.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={styles.socialLink}
-                aria-label="GitHub profile"
+                aria-label="GitHub"
               >
-                <GitHubIcon size={18} aria-hidden />
-                <span>GitHub</span>
+                <GitHubIcon size={18} />
               </a>
             ) : null}
-            <a
-              href={`mailto:${personal.email}`}
-              className={styles.socialLink}
-              aria-label={`Email ${personal.email}`}
-            >
-              <Mail size={18} aria-hidden />
-              <span>Email</span>
-            </a>
           </div>
-
-          <a href="#contact" className={styles.contactLink}>
-            Contact Me
-          </a>
         </div>
 
-        <aside className={styles.visual} aria-hidden="true">
-          <div className={styles.codePanel}>
-            <div className={styles.codeHeader}>
-              <span className={styles.dot} />
-              <span className={styles.dot} />
-              <span className={styles.dot} />
-              <span className={styles.fileName}>developer.ts</span>
+        <div className={styles.profileVisual}>
+          {showPhoto ? (
+            <Image
+              src={personal.profileImage}
+              alt="Bora Yaswanth, Full Stack Developer"
+              width={513}
+              height={541}
+              className={styles.profileHeroImage}
+              priority
+              unoptimized
+            />
+          ) : (
+            <div className={styles.photoFallback}>
+              <span>BY</span>
             </div>
-            <pre className={styles.code}>
-              <code>
-                <span className={styles.keyword}>const</span>{" "}
-                <span className={styles.variable}>developer</span> = {"{"}
-                {"\n"}
-                {"  "}
-                <span className={styles.property}>name</span>:{" "}
-                <span className={styles.string}>&quot;Bora Yaswanth&quot;</span>,
-                {"\n"}
-                {"  "}
-                <span className={styles.property}>role</span>:{" "}
-                <span className={styles.string}>
-                  &quot;Full Stack Developer&quot;
-                </span>
-                ,{"\n"}
-                {"  "}
-                <span className={styles.property}>experience</span>:{" "}
-                <span className={styles.string}>&quot;1+ Year&quot;</span>,
-                {"\n"}
-                {"  "}
-                <span className={styles.property}>location</span>:{" "}
-                <span className={styles.string}>&quot;India&quot;</span>,
-                {"\n"}
-                {"  "}
-                <span className={styles.property}>focus</span>:{" "}
-                <span className={styles.string}>
-                  &quot;Web Applications&quot;
-                </span>
-                ,{"\n"}
-                {"  "}
-                <span className={styles.property}>stack</span>: [
-                {"\n"}
-                {"    "}
-                <span className={styles.string}>&quot;Next.js&quot;</span>,
-                {"\n"}
-                {"    "}
-                <span className={styles.string}>&quot;TypeScript&quot;</span>,
-                {"\n"}
-                {"    "}
-                <span className={styles.string}>&quot;Node.js&quot;</span>,
-                {"\n"}
-                {"    "}
-                <span className={styles.string}>&quot;MongoDB&quot;</span>,
-                {"\n"}
-                {"    "}
-                <span className={styles.string}>&quot;PostgreSQL&quot;</span>,
-                {"\n"}
-                {"    "}
-                <span className={styles.string}>&quot;Docker&quot;</span>
-                {"\n"}
-                {"  "}]{"\n"}
-                {"}"};
-              </code>
-            </pre>
-          </div>
-        </aside>
+          )}
+        </div>
       </div>
     </section>
   );

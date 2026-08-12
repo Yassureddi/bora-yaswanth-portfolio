@@ -1,80 +1,84 @@
-import { ExternalLink } from "lucide-react";
-import { GitHubIcon } from "@/components/icons/SocialIcons";
-import { featuredProjects, personalProjects, type Project } from "@/data/projects";
-import SectionHeading from "@/components/SectionHeading/SectionHeading";
+import Image from "next/image";
+import {
+  featuredProjects,
+  personalProjects,
+  type Project,
+} from "@/data/projects";
+import Reveal from "@/components/Reveal/Reveal";
 import styles from "./Projects.module.css";
 
-function ProjectCard({
-  project,
-  showContribution = false,
-}: {
-  project: Project;
-  showContribution?: boolean;
-}) {
+function Visual({ project }: { project: Project }) {
+  if (project.image) {
+    return (
+      <div className={styles.media}>
+        <Image
+          src={project.image}
+          alt={`${project.name} project visual`}
+          width={1200}
+          height={700}
+          className={styles.image}
+          sizes="(max-width: 900px) 100vw, 50vw"
+        />
+      </div>
+    );
+  }
+
+  if (project.mockup === "infra") {
+    return (
+      <div className={styles.media}>
+        <div className={styles.infra}>
+          <span>Node.js API</span>
+          <em>↓</em>
+          <span>RabbitMQ</span>
+          <em>↓</em>
+          <span>PostgreSQL</span>
+          <div>
+            <b>Docker</b>
+            <b>Compose</b>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <article className={styles.card}>
-      <div className={styles.cardTop}>
-        <h3 className={styles.name}>{project.name}</h3>
-        <p className={styles.description}>{project.description}</p>
-      </div>
-
-      <div className={styles.tech}>
-        {project.technologies.map((tech) => (
-          <span key={tech} className={styles.techTag}>
-            {tech}
-          </span>
-        ))}
-      </div>
-
-      {project.highlights.length > 0 ? (
-        <div className={styles.features}>
-          <p className={styles.featuresLabel}>{project.highlightLabel}</p>
-          <ul className={styles.featureList}>
-            {project.highlights.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
+    <div className={styles.media}>
+      <div className={styles.mock}>
+        <div className={styles.mockBar}>
+          <i />
+          <i />
+          <i />
         </div>
-      ) : null}
-
-      {showContribution && project.contribution ? (
-        <div className={styles.contribution}>
-          <p className={styles.featuresLabel}>My Contribution</p>
-          <p className={styles.contributionText}>{project.contribution}</p>
+        <div className={styles.mockBody}>
+          <div />
+          <div />
+          <div />
         </div>
-      ) : null}
+      </div>
+    </div>
+  );
+}
 
-      <div className={styles.actions}>
-        {project.liveUrl ? (
-          <a
-            href={project.liveUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.primaryAction}
-          >
-            <ExternalLink size={16} aria-hidden />
-            View Project
-          </a>
-        ) : (
-          <span
-            className={`${styles.primaryAction} ${styles.disabled}`}
-            title="Project link not available"
-          >
-            <ExternalLink size={16} aria-hidden />
-            View Project
-          </span>
-        )}
-
-        {project.githubUrl ? (
-          <a
-            href={project.githubUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondaryAction}
-          >
-            <GitHubIcon size={16} aria-hidden />
-            GitHub
-          </a>
+function Card({ project, large = false }: { project: Project; large?: boolean }) {
+  return (
+    <article className={`${styles.card} ${large ? styles.large : ""}`}>
+      <Visual project={project} />
+      <div className={styles.body}>
+        <p className={styles.badge}>{project.category}</p>
+        <h3>{project.name}</h3>
+        <p className={styles.desc}>{project.description}</p>
+        <div className={styles.tags}>
+          {project.technologies.map((t) => (
+            <span key={t}>{t}</span>
+          ))}
+        </div>
+        <div className={styles.modules}>
+          {project.highlights.map((h) => (
+            <span key={h}>{h}</span>
+          ))}
+        </div>
+        {project.contribution ? (
+          <p className={styles.contrib}>{project.contribution}</p>
         ) : null}
       </div>
     </article>
@@ -82,38 +86,39 @@ function ProjectCard({
 }
 
 export default function Projects() {
-  return (
-    <section id="projects" className={`section ${styles.projects}`}>
-      <div className="container">
-        <SectionHeading
-          eyebrow="Selected Work"
-          title="Featured Projects"
-          description="Professional applications built and maintained as part of real-world product development."
-        />
+  const [first, ...rest] = featuredProjects;
 
-        <div className={styles.grid}>
-          {featuredProjects.map((project) => (
-            <ProjectCard
-              key={project.name}
-              project={project}
-              showContribution
-            />
-          ))}
+  return (
+    <section id="projects" className={`section ${styles.section}`}>
+      <div className="container">
+        <Reveal>
+          <p className="eyebrow">Work</p>
+          <h2 className={styles.title}>Featured Projects</h2>
+        </Reveal>
+
+        <div className={styles.featured}>
+          <Reveal>
+            <Card project={first} large />
+          </Reveal>
+          <div className={styles.side}>
+            {rest.map((p, i) => (
+              <Reveal key={p.name} delay={i * 40}>
+                <Card project={p} />
+              </Reveal>
+            ))}
+          </div>
         </div>
 
-        <div className={styles.personalSection}>
-          <div className={styles.personalHeader}>
-            <p className={styles.personalEyebrow}>Side Work</p>
-            <h3 className={styles.personalTitle}>Personal Projects</h3>
-            <p className={styles.personalDescription}>
-              Independent projects focused on full stack product concepts and
-              practical learning.
-            </p>
-          </div>
-
+        <div className={styles.personal}>
+          <Reveal>
+            <p className="eyebrow">Side Work</p>
+            <h3 className={styles.sub}>Personal Projects</h3>
+          </Reveal>
           <div className={styles.personalGrid}>
-            {personalProjects.map((project) => (
-              <ProjectCard key={project.name} project={project} />
+            {personalProjects.map((p, i) => (
+              <Reveal key={p.name} delay={i * 40}>
+                <Card project={p} />
+              </Reveal>
             ))}
           </div>
         </div>

@@ -1,31 +1,22 @@
 import { Download } from "lucide-react";
+import { personal } from "@/data/personal";
 import styles from "./ResumeDownloadButton.module.css";
 
-type ResumeDownloadButtonProps = {
-  variant?: "primary" | "secondary";
-  className?: string;
-};
-
-const RESUME_HREF = "/Bora-Yaswanth-Full-Stack-Developer-Resume.pdf";
-const RESUME_FILENAME = "Bora-Yaswanth-Full-Stack-Developer-Resume.pdf";
+type Props = { variant?: "primary" | "secondary"; className?: string };
 
 export default function ResumeDownloadButton({
-  variant = "secondary",
+  variant = "primary",
   className = "",
-}: ResumeDownloadButtonProps) {
-  const variantClass =
-    variant === "primary" ? styles.primary : styles.secondary;
-
+}: Props) {
   return (
     <a
-      href={RESUME_HREF}
-      download={RESUME_FILENAME}
-      type="application/pdf"
-      className={`${styles.button} ${variantClass} ${className}`.trim()}
-      aria-label={`Download resume PDF: ${RESUME_FILENAME}`}
+      href={personal.resumePath}
+      download={personal.resumeFilename}
+      className={`${styles.btn} ${styles[variant]} ${className}`.trim()}
+      aria-label={`Download resume: ${personal.resumeFilename}`}
     >
-      <Download size={16} className={styles.icon} aria-hidden />
-      <span>Download Resume</span>
+      <Download size={16} aria-hidden />
+      Download Resume
     </a>
   );
 }

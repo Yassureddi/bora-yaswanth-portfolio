@@ -8,52 +8,49 @@ export default function Footer() {
   return (
     <footer className={styles.footer}>
       <div className={`container ${styles.inner}`}>
-        <div className={styles.brandBlock}>
+        <div>
           <p className={styles.brand}>{personal.displayName}</p>
-          <p className={styles.role}>{personal.role}</p>
-          <p className={styles.tagline}>{personal.footerTagline}</p>
+          <p className={styles.role}>{personal.role.toUpperCase()}</p>
         </div>
-
-        <nav className={styles.nav} aria-label="Footer">
-          <ul className={styles.links}>
+        <ul className={styles.links}>
+          {footerLinks.map((l) => (
+            <li key={l.href}>
+              <a href={l.href}>{l.label}</a>
+            </li>
+          ))}
+        </ul>
+        <ul className={styles.social}>
+          <li>
+            <a
+              href={personal.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <LinkedInIcon size={14} />
+              LinkedIn
+            </a>
+          </li>
+          <li>
+            <a href={`mailto:${personal.email}`}>
+              <Mail size={14} />
+              Email
+            </a>
+          </li>
+          {personal.github ? (
             <li>
               <a
-                href={personal.linkedin}
+                href={personal.github}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <LinkedInIcon size={14} aria-hidden />
-                LinkedIn
+                <GitHubIcon size={14} />
+                GitHub
               </a>
             </li>
-            <li>
-              <a href={`mailto:${personal.email}`}>
-                <Mail size={14} aria-hidden />
-                Email
-              </a>
-            </li>
-            {personal.github ? (
-              <li>
-                <a
-                  href={personal.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <GitHubIcon size={14} aria-hidden />
-                  GitHub
-                </a>
-              </li>
-            ) : null}
-            {footerLinks.map((link) => (
-              <li key={link.href}>
-                <a href={link.href}>{link.label}</a>
-              </li>
-            ))}
-          </ul>
-        </nav>
+          ) : null}
+        </ul>
       </div>
-
-      <div className={styles.copyright}>
+      <div className={styles.copy}>
         <div className="container">
           <p>© 2026 Bora Yaswanth. All rights reserved.</p>
         </div>

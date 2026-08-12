@@ -1,29 +1,30 @@
 import { skillCategories } from "@/data/skills";
-import SectionHeading from "@/components/SectionHeading/SectionHeading";
+import Reveal from "@/components/Reveal/Reveal";
 import styles from "./Skills.module.css";
 
 export default function Skills() {
   return (
-    <section id="skills" className={`section ${styles.skills}`}>
+    <section id="skills" className={`section ${styles.section}`}>
       <div className="container">
-        <SectionHeading
-          eyebrow="Capabilities"
-          title="Skills"
-          description="Technologies and practices I use to design, build, and ship reliable web applications."
-        />
-
+        <Reveal>
+          <p className="eyebrow">Capabilities</p>
+          <h2 className={styles.title}>Skills</h2>
+        </Reveal>
         <div className={styles.grid}>
-          {skillCategories.map((category) => (
-            <article key={category.title} className={styles.card}>
-              <h3 className={styles.title}>{category.title}</h3>
-              <ul className={styles.list}>
-                {category.skills.map((skill) => (
-                  <li key={skill} className={styles.skill}>
-                    {skill}
-                  </li>
-                ))}
-              </ul>
-            </article>
+          {skillCategories.map((cat, i) => (
+            <Reveal key={cat.title} delay={i * 30}>
+              <article className={styles.card}>
+                <h3>
+                  <span>{cat.id}</span>
+                  {cat.title}
+                </h3>
+                <ul>
+                  {cat.skills.map((s) => (
+                    <li key={s}>{s}</li>
+                  ))}
+                </ul>
+              </article>
+            </Reveal>
           ))}
         </div>
       </div>

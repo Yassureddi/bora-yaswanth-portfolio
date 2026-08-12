@@ -1,209 +1,205 @@
-.projects {
-  background: linear-gradient(
-    180deg,
-    transparent 0%,
-    rgba(255, 255, 255, 0.015) 40%,
-    transparent 100%
-  );
+.section {
+  background: #ffffff;
 }
 
-.grid {
+.title {
+  margin-top: 0.55rem;
+  margin-bottom: 1.75rem;
+  font-size: clamp(1.9rem, 3.5vw, 2.7rem);
+  color: #111827;
+}
+
+.featured {
   display: grid;
-  gap: 1.25rem;
+  gap: 1.15rem;
+}
+
+.side {
+  display: grid;
+  gap: 1.15rem;
 }
 
 .card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  height: 100%;
   display: flex;
   flex-direction: column;
-  gap: 1.15rem;
-  padding: 1.5rem 1.35rem;
-  border: 1px solid var(--border-strong);
-  border-radius: var(--radius-lg);
-  background: var(--bg-elevated);
   transition:
-    border-color var(--transition),
-    transform var(--transition),
-    box-shadow var(--transition);
+    transform var(--ease),
+    box-shadow var(--ease),
+    border-color var(--ease);
 }
 
 .card:hover {
-  border-color: var(--gold-border);
   transform: translateY(-4px);
-  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.45);
+  border-color: #93c5fd;
+  box-shadow: 0 12px 28px rgba(37, 99, 235, 0.08);
 }
 
-.cardTop {
+.media {
+  background: #eff6ff;
+  border-bottom: 1px solid #e2e8f0;
+  min-height: 180px;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  min-height: 200px;
+  object-fit: cover;
+}
+
+.large .image {
+  min-height: 260px;
+}
+
+.body {
+  padding: 1.2rem 1.15rem 1.35rem;
   display: grid;
-  gap: 0.65rem;
+  gap: 0.7rem;
 }
 
-.name {
-  font-size: 1.3rem;
-  color: var(--text-primary);
-}
-
-.description {
-  color: var(--text-secondary);
-  font-size: 0.98rem;
-}
-
-.tech {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-}
-
-.techTag {
-  padding: 0.3rem 0.65rem;
-  font-size: 0.75rem;
-  font-weight: 500;
-  letter-spacing: 0.02em;
-  color: var(--gold-light);
-  border: 1px solid var(--gold-border);
-  border-radius: var(--radius-sm);
-  background: var(--gold-muted);
-}
-
-.features {
-  flex: 1;
-}
-
-.featuresLabel {
-  margin-bottom: 0.65rem;
-  font-size: 0.78rem;
-  font-weight: 600;
+.badge {
+  font-size: 0.72rem;
+  font-weight: 800;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--text-muted);
+  color: #2563eb;
 }
 
-.featureList {
+.body h3 {
+  font-size: 1.35rem;
+  color: #111827;
+}
+
+.desc {
+  color: #64748b;
+}
+
+.tags,
+.modules {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.4rem;
+  gap: 0.35rem;
 }
 
-.featureList li {
-  padding: 0.35rem 0.65rem;
-  font-size: 0.82rem;
-  color: var(--text-secondary);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  background: rgba(255, 255, 255, 0.02);
+.tags span {
+  padding: 0.28rem 0.55rem;
+  border-radius: 999px;
+  background: #eff6ff;
+  color: #1d4ed8;
+  border: 1px solid #dbeafe;
+  font-size: 0.75rem;
+  font-weight: 600;
 }
 
-.contribution {
-  padding-top: 0.15rem;
+.modules span {
+  padding: 0.28rem 0.55rem;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  color: #64748b;
+  font-size: 0.75rem;
 }
 
-.contributionText {
-  color: var(--text-secondary);
-  font-size: 0.92rem;
-  line-height: 1.6;
+.contrib {
+  padding-top: 0.7rem;
+  border-top: 1px solid #e2e8f0;
+  color: #64748b;
+  font-size: 0.9rem;
 }
 
-.actions {
+.infra {
+  min-height: 220px;
+  display: grid;
+  place-content: center;
+  gap: 0.45rem;
+  text-align: center;
+  color: #111827;
+  font-weight: 700;
+  background: linear-gradient(180deg, #eff6ff 0%, #ffffff 100%);
+}
+
+.infra em {
+  color: #2563eb;
+  font-style: normal;
+}
+
+.infra div {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.65rem;
-  margin-top: auto;
-  padding-top: 1rem;
-  border-top: 1px solid var(--border);
-}
-
-.primaryAction,
-.secondaryAction {
-  display: inline-flex;
-  align-items: center;
   gap: 0.4rem;
-  min-height: 42px;
-  padding: 0.55rem 0.95rem;
-  border-radius: var(--radius-sm);
-  font-size: 0.88rem;
+  justify-content: center;
+  margin-top: 0.5rem;
+}
+
+.infra b {
+  padding: 0.3rem 0.55rem;
+  border-radius: 999px;
+  background: #ffffff;
+  border: 1px solid #dbeafe;
+  font-size: 0.75rem;
   font-weight: 600;
-  transition:
-    background var(--transition),
-    border-color var(--transition),
-    color var(--transition),
-    opacity var(--transition);
+  color: #1d4ed8;
 }
 
-.primaryAction {
-  background: var(--gold);
-  color: #0a0a0b;
-  border: 1px solid var(--gold);
+.mock {
+  min-height: 200px;
+  background: #f8fafc;
 }
 
-.primaryAction:hover:not(.disabled) {
-  background: var(--gold-light);
+.mockBar {
+  display: flex;
+  gap: 0.35rem;
+  padding: 0.7rem;
+  border-bottom: 1px solid #e2e8f0;
+  background: #ffffff;
 }
 
-.secondaryAction {
-  background: transparent;
-  color: var(--text-secondary);
-  border: 1px solid var(--border-strong);
+.mockBar i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #cbd5e1;
 }
 
-.secondaryAction:hover:not(.disabled) {
-  color: var(--gold-light);
-  border-color: var(--gold-border);
-  background: var(--gold-muted);
+.mockBody {
+  display: grid;
+  gap: 0.5rem;
+  padding: 0.9rem;
 }
 
-.disabled {
-  opacity: 0.55;
-  cursor: not-allowed;
+.mockBody div {
+  height: 36px;
+  border-radius: 8px;
+  background: linear-gradient(90deg, #dbeafe, #eff6ff);
+  border: 1px solid #dbeafe;
 }
 
-@media (min-width: 700px) {
-  .grid,
-  .personalGrid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
+.personal {
+  margin-top: 3rem;
 }
 
-@media (min-width: 1100px) {
-  .grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .personalGrid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-.personalSection {
-  margin-top: 3.5rem;
-  padding-top: 2.5rem;
-  border-top: 1px solid var(--border);
-}
-
-.personalHeader {
-  margin-bottom: 1.75rem;
-  max-width: 38rem;
-}
-
-.personalEyebrow {
-  margin-bottom: 0.5rem;
-  font-size: 0.78rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--gold);
-}
-
-.personalTitle {
-  font-size: clamp(1.35rem, 2.5vw, 1.7rem);
-  margin-bottom: 0.55rem;
-  color: var(--text-primary);
-}
-
-.personalDescription {
-  color: var(--text-secondary);
-  font-size: 0.98rem;
+.sub {
+  margin-top: 0.45rem;
+  margin-bottom: 1.25rem;
+  font-size: clamp(1.4rem, 2.5vw, 1.8rem);
+  color: #111827;
 }
 
 .personalGrid {
   display: grid;
-  gap: 1.25rem;
+  gap: 1.15rem;
+}
+
+@media (min-width: 960px) {
+  .featured {
+    grid-template-columns: 1.2fr 0.9fr;
+  }
+
+  .personalGrid {
+    grid-template-columns: 1fr 1fr;
+  }
 }
