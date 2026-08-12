@@ -1,0 +1,92 @@
+.timeline {
+  display: grid;
+  gap: 1.25rem;
+  max-width: 760px;
+}
+
+.item {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1rem;
+  align-items: start;
+}
+
+.marker {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--gold-border);
+  background: var(--bg-elevated);
+  color: var(--gold);
+}
+
+.connector {
+  position: absolute;
+  left: 17px;
+  top: 36px;
+  bottom: -1.25rem;
+  width: 1px;
+  background: var(--gold-border);
+}
+
+.card {
+  padding: 1.25rem 1.2rem;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  background: var(--bg-elevated);
+  transition:
+    border-color var(--transition),
+    transform var(--transition);
+}
+
+.card:hover {
+  border-color: var(--gold-border);
+  transform: translateX(4px);
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 0.55rem;
+}
+
+.degree {
+  font-size: 1.1rem;
+  color: var(--text-primary);
+}
+
+.period {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--gold);
+}
+
+.institution {
+  color: var(--text-secondary);
+  margin-bottom: 0.55rem;
+  font-size: 0.98rem;
+}
+
+.score {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+}
+
+.score span {
+  color: var(--text-secondary);
+}
+
+@media (min-width: 640px) {
+  .header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+  }
+}

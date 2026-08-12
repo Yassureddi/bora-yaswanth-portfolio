@@ -1,0 +1,29 @@
+.heading {
+  margin-bottom: 2.75rem;
+  max-width: 40rem;
+}
+
+.center {
+  margin-inline: auto;
+  text-align: center;
+}
+
+.eyebrow {
+  margin-bottom: 0.65rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.title {
+  font-size: clamp(1.85rem, 3.5vw, 2.5rem);
+  color: var(--text-primary);
+}
+
+.description {
+  margin-top: 0.85rem;
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+}
