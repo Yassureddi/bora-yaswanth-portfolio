@@ -1,22 +1,32 @@
 import type { Metadata, Viewport } from "next";
-import { Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
+import { Instrument_Serif, DM_Sans, Syne } from "next/font/google";
+import ThemeProvider from "@/components/Theme/ThemeProvider";
+import Cursor from "@/components/Cursor/Cursor";
+import { DEFAULT_THEME, THEME_STORAGE_KEY } from "@/lib/theme";
 import "./globals.css";
 
-const jakarta = Plus_Jakarta_Sans({
-  variable: "--font-sans",
+const instrumentSerif = Instrument_Serif({
+  variable: "--font-serif",
+  subsets: ["latin"],
+  weight: "400",
+  display: "swap",
+});
+
+const syne = Syne({
+  variable: "--font-display",
   subsets: ["latin"],
   display: "swap",
 });
 
-const jetbrains = JetBrains_Mono({
-  variable: "--font-mono",
+const dmSans = DM_Sans({
+  variable: "--font-sans",
   subsets: ["latin"],
   display: "swap",
 });
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://borayaswanth.dev"),
-  title: "Bora Yaswanth | Full Stack Developer",
+  title: "Bora Yaswanth — Full Stack Developer",
   description:
     "Portfolio of Bora Yaswanth, Full Stack Developer with 1+ year of professional experience building modern web applications using Next.js, TypeScript, Node.js, MongoDB and PostgreSQL.",
   keywords: [
@@ -34,14 +44,14 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_IN",
-    title: "Bora Yaswanth | Full Stack Developer",
+    title: "Bora Yaswanth — Full Stack Developer",
     description:
       "Portfolio of Bora Yaswanth, Full Stack Developer with 1+ year of professional experience building modern web applications.",
-    siteName: "Bora Yaswanth Portfolio",
+    siteName: "Bora Yaswanth",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Bora Yaswanth | Full Stack Developer",
+    title: "Bora Yaswanth — Full Stack Developer",
     description:
       "Full Stack Developer with 1+ year of professional experience building modern web applications.",
   },
@@ -49,11 +59,12 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#FFFFFF",
-  colorScheme: "light",
+  themeColor: "#10261D",
   width: "device-width",
   initialScale: 1,
 };
+
+const themeBoot = `(function(){try{var t=localStorage.getItem(${JSON.stringify(THEME_STORAGE_KEY)});if(t==="forest"||t==="editorial"){document.documentElement.setAttribute("data-theme",t)}}catch(e){}})();`;
 
 export default function RootLayout({
   children,
@@ -61,8 +72,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${jakarta.variable} ${jetbrains.variable}`}>
-      <body>{children}</body>
+    <html
+      lang="en"
+      data-theme={DEFAULT_THEME}
+      className={`${instrumentSerif.variable} ${syne.variable} ${dmSans.variable}`}
+    >
+      <body>
+        <script dangerouslySetInnerHTML={{ __html: themeBoot }} />
+        <ThemeProvider>
+          <Cursor />
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   );
 }

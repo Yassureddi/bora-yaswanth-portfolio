@@ -1,16 +1,13 @@
 export const navLinks = [
-  { href: "#home", label: "Home" },
-  { href: "#about", label: "About" },
+  { href: "#work", label: "Work" },
+  { href: "#services", label: "Services" },
   { href: "#experience", label: "Experience" },
-  { href: "#skills", label: "Skills" },
-  { href: "#projects", label: "Projects" },
-  { href: "#education", label: "Education" },
   { href: "#contact", label: "Contact" },
 ] as const;
 
 export const footerLinks = [
-  { href: "#home", label: "Home" },
-  { href: "#about", label: "About" },
-  { href: "#projects", label: "Projects" },
+  { href: "#work", label: "Work" },
+  { href: "#services", label: "Services" },
+  { href: "#experience", label: "Experience" },
   { href: "#contact", label: "Contact" },
 ] as const;

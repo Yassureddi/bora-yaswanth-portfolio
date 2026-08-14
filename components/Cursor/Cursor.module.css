@@ -1,0 +1,40 @@
+.cursor {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 400;
+  pointer-events: none;
+  mix-blend-mode: difference;
+}
+
+:global(body.has-cursor) .cursor {
+  display: block;
+}
+
+.dot {
+  display: block;
+  width: 8px;
+  height: 8px;
+  margin: -4px 0 0 -4px;
+  border-radius: 50%;
+  background: var(--forest-cream);
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.hover .dot {
+  transform: scale(2.4);
+  background: var(--forest-gold);
+}
+
+.label {
+  position: absolute;
+  top: 12px;
+  left: 10px;
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--forest-cream);
+  white-space: nowrap;
+}

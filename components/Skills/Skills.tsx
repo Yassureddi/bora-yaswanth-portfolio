@@ -1,30 +1,30 @@
 import { skillCategories } from "@/data/skills";
-import Reveal from "@/components/Reveal/Reveal";
+import MotionReveal from "@/components/MotionReveal/MotionReveal";
 import styles from "./Skills.module.css";
 
 export default function Skills() {
+  if (!skillCategories.length) return null;
+
   return (
     <section id="skills" className={`section ${styles.section}`}>
       <div className="container">
-        <Reveal>
-          <p className="eyebrow">Capabilities</p>
+        <MotionReveal>
+          <p className="sectionMark">/ Skills</p>
           <h2 className={styles.title}>Skills</h2>
-        </Reveal>
+        </MotionReveal>
+
         <div className={styles.grid}>
           {skillCategories.map((cat, i) => (
-            <Reveal key={cat.title} delay={i * 30}>
-              <article className={styles.card}>
-                <h3>
-                  <span>{cat.id}</span>
-                  {cat.title}
-                </h3>
+            <MotionReveal key={cat.title} delay={i * 0.04}>
+              <div className={styles.group}>
+                <h3>{cat.title}</h3>
                 <ul>
-                  {cat.skills.map((s) => (
-                    <li key={s}>{s}</li>
+                  {cat.skills.map((skill) => (
+                    <li key={skill}>{skill}</li>
                   ))}
                 </ul>
-              </article>
-            </Reveal>
+              </div>
+            </MotionReveal>
           ))}
         </div>
       </div>

@@ -1,0 +1,107 @@
+.section {
+  background: var(--bg-forest);
+  color: var(--text-on-dark);
+}
+
+.mark {
+  margin-bottom: 1.75rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--sage);
+}
+
+.list {
+  border-top: 1px solid var(--line-on-dark);
+}
+
+.row {
+  border-bottom: 1px solid var(--line-on-dark);
+  background: transparent;
+  color: var(--text-on-dark);
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.row:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+.open {
+  background: var(--bg-deep);
+  color: var(--text-on-dark);
+  border-bottom-color: var(--bg-deep);
+}
+
+.head {
+  display: grid;
+  grid-template-columns: 3rem 1fr auto;
+  gap: 1rem;
+  align-items: center;
+  min-height: 88px;
+  padding: 1.1rem 0.85rem;
+}
+
+.num {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--sage);
+}
+
+.head h3 {
+  margin: 0;
+  min-width: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.05rem, 4.2vw, 2.35rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  color: inherit;
+}
+
+.icon {
+  opacity: 0.75;
+  color: var(--gold);
+  flex-shrink: 0;
+}
+
+.detail {
+  overflow: hidden;
+  padding: 0 0.85rem 1.4rem 4rem;
+}
+
+.detail p {
+  max-width: 42rem;
+  color: var(--sage);
+  font-size: 0.98rem;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.9rem;
+}
+
+.tags span {
+  padding: 0.25rem 0.55rem;
+  border: 1px solid var(--line-on-dark);
+  border-radius: 999px;
+  font-size: 0.72rem;
+  color: var(--sage);
+}
+
+@media (max-width: 640px) {
+  .head {
+    grid-template-columns: 2.2rem 1fr auto;
+    min-height: 72px;
+    padding-inline: 0.4rem;
+  }
+
+  .detail {
+    padding-left: 0.4rem;
+  }
+}

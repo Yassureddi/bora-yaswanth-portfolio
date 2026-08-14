@@ -1,144 +1,140 @@
 "use client";
 
-import { FormEvent, useState } from "react";
-import { Mail, Phone, MapPin, Send } from "lucide-react";
-import { LinkedInIcon, GitHubIcon } from "@/components/icons/SocialIcons";
-import { personal } from "@/data/personal";
-import Reveal from "@/components/Reveal/Reveal";
+import { ArrowUpRight, Mail, MapPin, Phone, User } from "lucide-react";
+import { motion, useReducedMotion } from "framer-motion";
+import { getPortfolioProfile, getWhatsAppHref } from "@/lib/portfolio";
 import styles from "./Contact.module.css";
 
-type FormState = { name: string; email: string; message: string };
-type FormErrors = Partial<Record<keyof FormState, string>>;
-const initial: FormState = { name: "", email: "", message: "" };
-
-function validate(form: FormState): FormErrors {
-  const errors: FormErrors = {};
-  if (!form.name.trim() || form.name.trim().length < 2) {
-    errors.name = "Please enter your name.";
-  }
-  if (!form.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
-    errors.email = "Please enter a valid email.";
-  }
-  if (!form.message.trim() || form.message.trim().length < 10) {
-    errors.message = "Message must be at least 10 characters.";
-  }
-  return errors;
-}
+const ease = [0.22, 1, 0.36, 1] as const;
 
 export default function Contact() {
-  const [form, setForm] = useState(initial);
-  const [errors, setErrors] = useState<FormErrors>({});
-  const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
+  const profile = getPortfolioProfile();
+  const reduce = useReducedMotion();
+  const whatsapp = getWhatsAppHref(profile.phoneRaw, profile.location);
 
-  const onSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    const next = validate(form);
-    setErrors(next);
-    if (Object.keys(next).length) {
-      setStatus("error");
-      return;
-    }
-    setStatus("success");
-    setForm(initial);
-  };
+  const cards = [
+    profile.name
+      ? { icon: User, label: "Profile", value: profile.name }
+      : null,
+    profile.phone
+      ? {
+          icon: Phone,
+          label: "Direct line / WhatsApp",
+          value: profile.phone,
+          href: whatsapp || `tel:${profile.phoneRaw}`,
+        }
+      : null,
+    profile.email
+      ? {
+          icon: Mail,
+          label: "Email",
+          value: profile.email,
+          href: `mailto:${profile.email}`,
+        }
+      : null,
+    profile.location
+      ? { icon: MapPin, label: "Location", value: profile.location }
+      : null,
+  ].filter(Boolean) as {
+    icon: typeof User;
+    label: string;
+    value: string;
+    href?: string;
+  }[];
 
   return (
     <section id="contact" className={`section ${styles.section}`}>
       <div className="container">
-        <div className={styles.grid}>
-          <Reveal>
-            <p className="eyebrow">Contact</p>
-            <h2 className={styles.title}>{personal.contactTitle}</h2>
-            <p className={styles.text}>{personal.contactText}</p>
-            <div className={styles.info}>
-              <a href={`mailto:${personal.email}`}>
-                <Mail size={16} />
-                {personal.email}
-              </a>
-              <a href={`tel:${personal.phone}`}>
-                <Phone size={16} />
-                {personal.phoneDisplay}
-              </a>
-              <span>
-                <MapPin size={16} />
-                {personal.location}
-              </span>
-              <a
-                href={personal.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <LinkedInIcon size={16} />
-                LinkedIn
-              </a>
-              {personal.github ? (
+        <motion.div
+          className={styles.panel}
+          initial={reduce ? false : { opacity: 0, y: 36 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.25 }}
+          transition={{ duration: 0.7, ease }}
+        >
+          <div className={styles.copy}>
+            <motion.p
+              className={styles.eyebrow}
+              initial={reduce ? false : { opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+            >
+              {profile.contactEyebrow}
+            </motion.p>
+            <motion.h2
+              className={styles.title}
+              initial={reduce ? false : { opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.18, duration: 0.6 }}
+            >
+              Get in Touch
+            </motion.h2>
+            <motion.p
+              className={styles.message}
+              initial={reduce ? false : { opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.28 }}
+            >
+              {profile.contactMessage}
+            </motion.p>
+            <motion.div
+              className={styles.actions}
+              initial={reduce ? false : { opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.36 }}
+            >
+              {whatsapp ? (
                 <a
-                  href={personal.github}
+                  href={whatsapp}
                   target="_blank"
                   rel="noopener noreferrer"
+                  className={styles.primary}
+                  data-cursor="talk"
                 >
-                  <GitHubIcon size={16} />
-                  GitHub
+                  Chat on WhatsApp
+                  <ArrowUpRight size={16} />
                 </a>
               ) : null}
-            </div>
-          </Reveal>
+              {profile.email ? (
+                <a href={`mailto:${profile.email}`} className={styles.secondary}>
+                  Send Email
+                </a>
+              ) : null}
+            </motion.div>
+          </div>
 
-          <Reveal delay={50}>
-            <form className={styles.form} onSubmit={onSubmit} noValidate>
-              <label>
-                Name
-                <input
-                  value={form.name}
-                  onChange={(e) => {
-                    setForm({ ...form, name: e.target.value });
-                    setStatus("idle");
-                  }}
-                  aria-invalid={Boolean(errors.name)}
-                />
-                {errors.name ? <span>{errors.name}</span> : null}
-              </label>
-              <label>
-                Email
-                <input
-                  type="email"
-                  value={form.email}
-                  onChange={(e) => {
-                    setForm({ ...form, email: e.target.value });
-                    setStatus("idle");
-                  }}
-                  aria-invalid={Boolean(errors.email)}
-                />
-                {errors.email ? <span>{errors.email}</span> : null}
-              </label>
-              <label>
-                Message
-                <textarea
-                  rows={5}
-                  value={form.message}
-                  onChange={(e) => {
-                    setForm({ ...form, message: e.target.value });
-                    setStatus("idle");
-                  }}
-                  aria-invalid={Boolean(errors.message)}
-                />
-                {errors.message ? <span>{errors.message}</span> : null}
-              </label>
-              <button type="submit">
-                <Send size={15} />
-                Send Message
-              </button>
-              {status === "success" ? (
-                <p className={styles.ok}>
-                  Thanks — please also email {personal.email}.
-                </p>
-              ) : null}
-              {status === "error" ? (
-                <p className={styles.err}>Please fix the highlighted fields.</p>
-              ) : null}
-            </form>
-          </Reveal>
-        </div>
+          {cards.length ? (
+            <div className={styles.cards}>
+              {cards.map((card, i) => {
+                const Icon = card.icon;
+                const inner = (
+                  <>
+                    <Icon size={16} />
+                    <span>{card.label}</span>
+                    <strong>{card.value}</strong>
+                  </>
+                );
+                return (
+                  <motion.div
+                    key={card.label}
+                    className={styles.card}
+                    initial={reduce ? false : { opacity: 0, y: 16 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.28 + i * 0.08, duration: 0.45 }}
+                    whileHover={reduce ? undefined : { y: -4 }}
+                  >
+                    {card.href ? <a href={card.href}>{inner}</a> : inner}
+                  </motion.div>
+                );
+              })}
+            </div>
+          ) : null}
+        </motion.div>
       </div>
     </section>
   );

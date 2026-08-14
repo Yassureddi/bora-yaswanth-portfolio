@@ -7,11 +7,14 @@
   padding: 0.75rem 1.25rem;
   border-radius: 999px;
   font-weight: 700;
-  font-size: 0.92rem;
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   transition:
     transform var(--ease),
     background var(--ease),
-    border-color var(--ease);
+    border-color var(--ease),
+    color var(--ease);
 }
 
 .btn:hover {
@@ -19,22 +22,22 @@
 }
 
 .primary {
-  background: #2563eb;
-  border: 1.5px solid #2563eb;
-  color: #ffffff;
+  background: var(--ink);
+  border: 1px solid var(--ink);
+  color: var(--ink-invert);
 }
 
 .primary:hover {
-  background: #1d4ed8;
-  border-color: #1d4ed8;
+  box-shadow: inset 0 0 0 1px var(--gold);
 }
 
 .secondary {
-  background: #ffffff;
-  border: 1.5px solid #2563eb;
-  color: #2563eb;
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--text);
 }
 
 .secondary:hover {
-  background: #eff6ff;
+  background: var(--ink);
+  color: var(--ink-invert);
 }
